@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const { createUser, setUser, updateUser } = use(AuthContext)
@@ -23,12 +24,12 @@ const Register = () => {
                         navigate('/')
                     })
                     .catch((error) => {
-                        console.log(error)
+                        toast(error.code)
                         setUser(userData)
                     })
             })
             .catch(error => {
-                console.log(error)
+                toast(error.code)
             })
     }
 

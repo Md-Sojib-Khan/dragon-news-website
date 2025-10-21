@@ -1,6 +1,7 @@
 import React, { use, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const {logInUser, forgatePassword} = use(AuthContext);
@@ -16,8 +17,8 @@ const Login = () => {
         const password = form.password.value;
 
         logInUser(email, password)
-            .then(result => {
-                const userData = result.user;
+            .then(() => {
+                toast.success('LogIn Successfully')
                 navigate(`${location.state ? location.state : '/'}`)
             })
             .catch(error => {
@@ -28,12 +29,12 @@ const Login = () => {
     const handleForgatePass = () =>{
         const email = emailRef.current.value;
         forgatePassword(email)
-        .then((res)=>{
-            console.log(res)
-            alert('Check your email to reset password')
+        .then(()=>{
+            toast('Check your email to reset password')
         })
         .catch(error =>{
             console.log(error)
+            toast(error.code)
         })
     }
 

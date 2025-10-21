@@ -2,14 +2,15 @@ import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import userImg from '../assets/user.png'
 import { AuthContext } from '../Context/AuthContext/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const { user, logOutUser } = use(AuthContext)
 
     const handleSignOutUser = () => {
         logOutUser()
-        .then(result => {
-            // console.log(result)
+        .then(() => {
+            toast.success('LogIn Successfully')
         })
         .catch(error =>{
             console.log(error)
