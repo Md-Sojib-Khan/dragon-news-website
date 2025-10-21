@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../Components/Header';
-import { Outlet, useNavigation } from 'react-router';
+import { Outlet, useLoaderData, useNavigation } from 'react-router';
 import Marque from '../../Components/Marque';
 import Navbar from '../../Components/Navbar';
 import LeftSidebar from './LeftSidebar';
@@ -8,11 +8,12 @@ import RightSidebar from './RightSidebar';
 
 const HomeLayouts = () => {
     const { state } = useNavigation();
+    const data = useLoaderData();
     return (
         <div>
             <header>
                 <Header></Header>
-                <Marque></Marque>
+                <Marque data={data}></Marque>
                 <Navbar></Navbar>
             </header>
             <main className='w-11/12 mx-auto grid grid-cols-12 gap-5 mt-10'>

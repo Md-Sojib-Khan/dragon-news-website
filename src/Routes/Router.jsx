@@ -12,36 +12,38 @@ import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        Component:HomeLayouts,
+        path: '/',
+        Component: HomeLayouts,
+        loader: () => fetch('/news.json'),
+        hydrateFallbackElement: <p className='min-h-screen flex justify-center items-center'><span className="loading loading-spinner loading-xl"></span></p>,
         children: [
             {
                 index: true,
                 Component: Home
             },
             {
-                path:'/about',
+                path: '/about',
                 Component: About
             },
             {
-                path:'/career',
+                path: '/career',
                 Component: Career
             },
             {
-                path:'/category/:id',
+                path: '/category/:id',
                 Component: CategoryNews,
-                loader: ()=>fetch('/news.json'),
+                loader: () => fetch('/news.json'),
                 hydrateFallbackElement: <p className='min-h-screen flex justify-center items-center'><span className="loading loading-spinner loading-xl"></span></p>
             }
         ]
     },
     {
         path: '/auth',
-        element:<AuthLayout></AuthLayout>,
+        element: <AuthLayout></AuthLayout>,
         children: [
             {
-                path:'/auth/login',
-                element:<Login></Login>
+                path: '/auth/login',
+                element: <Login></Login>
             },
             {
                 path: '/auth/register',
@@ -51,10 +53,10 @@ const router = createBrowserRouter([
     },
     {
         path: '/news-details/:id',
-        element:<PrivateRoute>
+        element: <PrivateRoute>
             <NewsDetailsPage></NewsDetailsPage>
         </PrivateRoute>,
-        loader: ()=>fetch('/news.json'),
+        loader: () => fetch('/news.json'),
         hydrateFallbackElement: <p className='min-h-screen flex justify-center items-center'><span className="loading loading-spinner loading-xl"></span></p>
     }
 ])

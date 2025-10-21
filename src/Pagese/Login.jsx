@@ -23,6 +23,11 @@ const Login = () => {
                 setError(error.code)
             })
     }
+
+    const handleForgatePass = () =>{
+
+    }
+    
     return (
         <div className="hero">
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
@@ -33,7 +38,7 @@ const Login = () => {
                         <input type="email" name='email' className="input" placeholder="Email" />
                         <label className="label font-bold text-primary">Password</label>
                         <input type="password" name='password' className="input" placeholder="Password" />
-                        <div><a className="link link-hover">Forgot password?</a></div>
+                        <div><a onClick={handleForgatePass} className="link link-hover" type='button'>Forgot password?</a></div>
                         {
                             error && <p className='text-xs text-red-500'>{error}</p>
                         }
