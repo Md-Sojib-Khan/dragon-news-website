@@ -1,12 +1,13 @@
-import React, { use, useState } from 'react';
+import React, { use, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext/AuthProvider';
 
 const Login = () => {
-    const {logInUser} = use(AuthContext);
+    const {logInUser, forgatePassword} = use(AuthContext);
     const [error, setError] = useState('')
     const location = useLocation();
     const navigate = useNavigate();
+    const emailRef = useRef(null)
 
     const handleLogIn = (e) => {
         e.preventDefault()
@@ -25,9 +26,17 @@ const Login = () => {
     }
 
     const handleForgatePass = () =>{
-
+        const email = emailRef.current.value;
+        forgatePassword(email)
+        .then((res)=>{
+            console.log(res)
+            alert('Check your email to reset password')
+        })
+        .catch(error =>{
+            console.log(error)
+        })
     }
-    
+
     return (
         <div className="hero">
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
@@ -35,7 +44,7 @@ const Login = () => {
                 <form onSubmit={handleLogIn} className="card-body">
                     <fieldset className="fieldset">
                         <label className="label font-bold text-primary">Email</label>
-                        <input type="email" name='email' className="input" placeholder="Email" />
+                        <input type="email" ref={emailRef} name='email' className="input" placeholder="Email" />
                         <label className="label font-bold text-primary">Password</label>
                         <input type="password" name='password' className="input" placeholder="Password" />
                         <div><a onClick={handleForgatePass} className="link link-hover" type='button'>Forgot password?</a></div>
